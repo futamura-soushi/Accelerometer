@@ -1,4 +1,5 @@
 var aX = 0, aY = 0, aZ = 0;                     // 加速度の値を入れる変数を3個用意
+var alpha = 0, beta = 0; gamma = 0;
 
 function ClickRequestDeviceSensor(){
   //. ユーザーに「許可」を求めるダイアログを表示
@@ -12,6 +13,12 @@ function ClickRequestDeviceSensor(){
         aY = dat.accelerationIncludingGravity.y;    // y軸の重力加速度（Android と iOSでは正負が逆）
         aZ = dat.accelerationIncludingGravity.z;    // z軸の重力加速度（Android と iOSでは正負が逆）
       });
+
+      window.addEventListener("deviceorientation", (dat) => {
+        alpha = dat.alpha;  // z軸（表裏）まわりの回転の角度（反時計回りがプラス）
+        beta  = dat.beta;   // x軸（左右）まわりの回転の角度（引き起こすとプラス）
+        gamma = dat.gamma;  // y軸（上下）まわりの回転の角度（右に傾けるとプラス）
+    });
 
       // 指定時間ごとに繰り返し実行される setInterval(実行する内容, 間隔[ms]) タイマーを設定
         var timer = window.setInterval(() => {
@@ -42,6 +49,12 @@ if( window.DeviceOrientationEvent ){
         aZ = dat.accelerationIncludingGravity.z;    // z軸の重力加速度（Android と iOSでは正負が逆）
       });
 
+      window.addEventListener("deviceorientation", (dat) => {
+        alpha = dat.alpha;  // z軸（表裏）まわりの回転の角度（反時計回りがプラス）
+        beta  = dat.beta;   // x軸（左右）まわりの回転の角度（引き起こすとプラス）
+        gamma = dat.gamma;  // y軸（上下）まわりの回転の角度（右に傾けるとプラス）
+    });
+
       // 指定時間ごとに繰り返し実行される setInterval(実行する内容, 間隔[ms]) タイマーを設定
         var timer = window.setInterval(() => {
             displayData();      // displayData 関数を実行
@@ -68,5 +81,9 @@ function displayData() {
     var txt = document.getElementById("txt");   // データを表示するdiv要素の取得
     txt.innerHTML = "x: " + aX.toPrecision(4) + "<br>"         // x軸の値
                   + "y: " + aY.toPrecision(4) + "<br>"         // y軸の値
-                  + "z: " + aZ.toPrecision(4);                 // z軸の値
+                  + "z: " + aZ.toPrecision(4) + "<br>"         // z軸の値
+                    "α: " + alpha.toPrecision(4) + "<br>"         // x軸の値
+                  + "β: " + beta.toPrecision(4) + "<br>"         // y軸の値
+                  + "γ: " + gamma.toPrecision(4) + "<br>"         // z軸の値
 }
+  
