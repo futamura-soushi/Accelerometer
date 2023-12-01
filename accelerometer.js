@@ -1,5 +1,5 @@
 var aX = 0, aY = 0, aZ = 0;                     // 加速度の値を入れる変数を3個用意
-var alpha = 0, beta = 0; gamma = 0;
+var alpha = 0, beta = 0, gamma = 0;
 
 function ClickRequestDeviceSensor(){
   //. ユーザーに「許可」を求めるダイアログを表示
