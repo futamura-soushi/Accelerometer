@@ -82,7 +82,7 @@ function displayData() {
     txt.innerHTML = "x: " + aX.toPrecision(4) + "<br>"         // x軸の値
                   + "y: " + aY.toPrecision(4) + "<br>"         // y軸の値
                   + "z: " + aZ.toPrecision(4) + "<br>"         // z軸の値
-                    "α: " + alpha.toPrecision(4) + "<br>"         // x軸の値
+                  +  "α: " + alpha.toPrecision(4) + "<br>"         // x軸の値
                   + "β: " + beta.toPrecision(4) + "<br>"         // y軸の値
                   + "γ: " + gamma.toPrecision(4) + "<br>"         // z軸の値
 }
