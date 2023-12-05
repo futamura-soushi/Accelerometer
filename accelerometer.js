@@ -9,9 +9,9 @@ function ClickRequestDeviceSensor(){
       $('#sensorrequest').css( 'display', 'none' );
       //. 許可された場合のみイベントハンドラを追加できる
       window.addEventListener( "devicemotion", (dat) =>{
-        aX = dat.accelerationIncludingGravity.x;    // x軸の重力加速度（Android と iOSでは正負が逆）
-        aY = dat.accelerationIncludingGravity.y;    // y軸の重力加速度（Android と iOSでは正負が逆）
-        aZ = dat.accelerationIncludingGravity.z;    // z軸の重力加速度（Android と iOSでは正負が逆）
+        aX = dat.acceleration.x;    // x軸の重力加速度（Android と iOSでは正負が逆）
+        aY = dat.acceleration.y;    // y軸の重力加速度（Android と iOSでは正負が逆）
+        aZ = dat.acceleration.z;    // z軸の重力加速度（Android と iOSでは正負が逆）
       });
 
       window.addEventListener("deviceorientation", (dat) => {
@@ -44,9 +44,9 @@ if( window.DeviceOrientationEvent ){
     //. Android または iOS 13 未満の場合、
     //. DeviceOrientationEvent オブジェクトが有効な場合のみ、deviceorientation イベント発生時に deviceOrientaion 関数がハンドリングするよう登録
     window.addEventListener( "devicemotion", (dat) =>{
-        aX = dat.accelerationIncludingGravity.x;    // x軸の重力加速度（Android と iOSでは正負が逆）
-        aY = dat.accelerationIncludingGravity.y;    // y軸の重力加速度（Android と iOSでは正負が逆）
-        aZ = dat.accelerationIncludingGravity.z;    // z軸の重力加速度（Android と iOSでは正負が逆）
+        aX = dat.acceleration.x;    // x軸の重力加速度（Android と iOSでは正負が逆）
+        aY = dat.acceleration.y;    // y軸の重力加速度（Android と iOSでは正負が逆）
+        aZ = dat.acceleration.z;    // z軸の重力加速度（Android と iOSでは正負が逆）
       });
 
       window.addEventListener("deviceorientation", (dat) => {
