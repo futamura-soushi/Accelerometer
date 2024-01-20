@@ -1,4 +1,7 @@
 var aX = 0, aY = 0, aZ = 0;                     // 加速度の値を入れる変数を3個用意
+var prex, prey, prez =0;
+var velx, vely, velz = 0;
+var timer, pretimer = 0;
 var alpha = 0, beta = 0, gamma = 0;
 
 function ClickRequestDeviceSensor(){
@@ -9,9 +12,17 @@ function ClickRequestDeviceSensor(){
       $('#sensorrequest').css( 'display', 'none' );
       //. 許可された場合のみイベントハンドラを追加できる
       window.addEventListener( "devicemotion", (dat) =>{
-        aX = dat.acceleration.x;    // x軸の重力加速度（Android と iOSでは正負が逆）
-        aY = dat.acceleration.y;    // y軸の重力加速度（Android と iOSでは正負が逆）
-        aZ = dat.acceleration.z;    // z軸の重力加速度（Android と iOSでは正負が逆）
+        pretimer = timer
+        timer = performance.now()
+        prex = aX;
+        prey = aY;
+        prez = aZ;
+        aX = dat.accelerationIncludingGravity.x;    // x軸の重力加速度（Android と iOSでは正負が逆）
+        aY = dat.accelerationIncludingGravity.y;    // y軸の重力加速度（Android と iOSでは正負が逆）
+        aZ = dat.accelerationIncludingGravity.z;    // z軸の重力加速度（Android と iOSでは正負が逆）
+        velx = (timer - pretimer)*(prex + aX)/2 + valx;
+        velx = (timer - pretimer)*(prey + aY)/2 + valy;
+        velx = (timer - pretimer)*(prez + aZ)/2 + valz;
       });
 
       window.addEventListener("deviceorientation", (dat) => {
@@ -44,9 +55,17 @@ if( window.DeviceOrientationEvent ){
     //. Android または iOS 13 未満の場合、
     //. DeviceOrientationEvent オブジェクトが有効な場合のみ、deviceorientation イベント発生時に deviceOrientaion 関数がハンドリングするよう登録
     window.addEventListener( "devicemotion", (dat) =>{
-        aX = dat.acceleration.x;    // x軸の重力加速度（Android と iOSでは正負が逆）
-        aY = dat.acceleration.y;    // y軸の重力加速度（Android と iOSでは正負が逆）
-        aZ = dat.acceleration.z;    // z軸の重力加速度（Android と iOSでは正負が逆）
+        pretimer = timer
+        timer = performance.now()
+        prex = aX;
+        prey = aY;
+        prez = aZ;
+        aX = dat.accelerationIncludingGravity.x;    // x軸の重力加速度（Android と iOSでは正負が逆）
+        aY = dat.accelerationIncludingGravity.y;    // y軸の重力加速度（Android と iOSでは正負が逆）
+        aZ = dat.accelerationIncludingGravity.z;    // z軸の重力加速度（Android と iOSでは正負が逆）
+        velx = (timer - pretimer)*(prex + aX)/2 + valx;
+        velx = (timer - pretimer)*(prey + aY)/2 + valy;
+        velx = (timer - pretimer)*(prez + aZ)/2 + valz;
       });
 
       window.addEventListener("deviceorientation", (dat) => {
@@ -85,5 +104,9 @@ function displayData() {
                   +  "α: " + alpha.toPrecision(4) + "<br>"         // x軸の値
                   + "β: " + beta.toPrecision(4) + "<br>"         // y軸の値
                   + "γ: " + gamma.toPrecision(4) + "<br>"         // z軸の値
+                  + "velx: " + velx.toPrecision(4) + "<br>"         // x軸の値
+                  + "vely: " + vely.toPrecision(4) + "<br>"         // y軸の値
+                  + "velz: " + velz.toPrecision(4) + "<br>"         // z軸の値
+
 }
   
