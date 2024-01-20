@@ -20,9 +20,9 @@ function ClickRequestDeviceSensor(){
         aX = dat.accelerationIncludingGravity.x;    // x軸の重力加速度（Android と iOSでは正負が逆）
         aY = dat.accelerationIncludingGravity.y;    // y軸の重力加速度（Android と iOSでは正負が逆）
         aZ = dat.accelerationIncludingGravity.z;    // z軸の重力加速度（Android と iOSでは正負が逆）
-        velx = (timer - pretimer)*(prex + aX)/2 + valx;
-        velx = (timer - pretimer)*(prey + aY)/2 + valy;
-        velx = (timer - pretimer)*(prez + aZ)/2 + valz;
+        velx = (timer - pretimer)*(prex + aX)/2 + velx;
+        velx = (timer - pretimer)*(prey + aY)/2 + vely;
+        velx = (timer - pretimer)*(prez + aZ)/2 + velz;
       });
 
       window.addEventListener("deviceorientation", (dat) => {
@@ -63,9 +63,9 @@ if( window.DeviceOrientationEvent ){
         aX = dat.accelerationIncludingGravity.x;    // x軸の重力加速度（Android と iOSでは正負が逆）
         aY = dat.accelerationIncludingGravity.y;    // y軸の重力加速度（Android と iOSでは正負が逆）
         aZ = dat.accelerationIncludingGravity.z;    // z軸の重力加速度（Android と iOSでは正負が逆）
-        velx = (timer - pretimer)*(prex + aX)/2 + valx;
-        velx = (timer - pretimer)*(prey + aY)/2 + valy;
-        velx = (timer - pretimer)*(prez + aZ)/2 + valz;
+        velx = (timer - pretimer)*(prex + aX)/2 + velx;
+        velx = (timer - pretimer)*(prey + aY)/2 + vely;
+        velx = (timer - pretimer)*(prez + aZ)/2 + velz;
       });
 
       window.addEventListener("deviceorientation", (dat) => {
