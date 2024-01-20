@@ -27,9 +27,9 @@ function ClickRequestDeviceSensor(){
         prex = aX;
         prey = aY;
         prez = aZ;
-        aX = dat.accelerationIncludingGravity.x;
-        aY = dat.accelerationIncludingGravity.y;
-        aZ = dat.accelerationIncludingGravity.z;
+        aX = dat.acceleration.x;
+        aY = dat.acceleration.y;
+        aZ = dat.acceleration.z;
         velx = (timer - pretimer)*(prex + aX)/2 + velx;
         vely = (timer - pretimer)*(prey + aY)/2 + vely;
         velz = (timer - pretimer)*(prez + aZ)/2 + velz;
@@ -61,9 +61,9 @@ if( window.DeviceOrientationEvent ){
       prex = aX;
       prey = aY;
       prez = aZ;
-      aX = dat.accelerationIncludingGravity.x;
-      aY = dat.accelerationIncludingGravity.y;
-      aZ = dat.accelerationIncludingGravity.z;
+      aX = dat.acceleration.x;
+      aY = dat.acceleration.y;
+      aZ = dat.acceleration.z;
       velx = (timer - pretimer)*(prex + aX)/2 + velx;
       vely = (timer - pretimer)*(prey + aY)/2 + vely;
       velz = (timer - pretimer)*(prez + aZ)/2 + velz;
