@@ -6,11 +6,95 @@
 <title>加速度の値を得る</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
- 
+
 <body>
-<div id="txt">ここにデータを表示</div>             <!-- データを表示するdiv要素 -->
- 
-<script src = "accelerometer.js"></script>
- 
+<div id="txt">ここにデータを表示</div> <!-- データを表示するdiv要素 -->
+
+<script>
+var aX = 0, aY = 0, aZ = 0;                     
+var prex, prey, prez = 0;
+var velx, vely, velz = 0;
+var timer, pretimer = 0;
+var alpha = 0, beta = 0, gamma = 0;
+
+function ClickRequestDeviceSensor(){
+  DeviceOrientationEvent.requestPermission().then( function( response ){
+    if( response === 'granted' ){
+      $('#sensorrequest').css( 'display', 'none' );
+      window.addEventListener("devicemotion", (dat) =>{
+        pretimer = timer
+        timer = performance.now()
+        prex = aX;
+        prey = aY;
+        prez = aZ;
+        aX = dat.accelerationIncludingGravity.x;
+        aY = dat.accelerationIncludingGravity.y;
+        aZ = dat.accelerationIncludingGravity.z;
+        velx = (timer - pretimer)*(prex + aX)/2 + velx;
+        vely = (timer - pretimer)*(prey + aY)/2 + vely;
+        velz = (timer - pretimer)*(prez + aZ)/2 + velz;
+      });
+
+      window.addEventListener("deviceorientation", (dat) => {
+        alpha = dat.alpha;
+        beta  = dat.beta;
+        gamma = dat.gamma;
+      });
+
+      var timer = window.setInterval(() => {
+        displayData();
+      }, 200);
+    }
+  }).catch( function( e ){
+    console.log( e );
+  });
+}
+
+if( window.DeviceOrientationEvent ){
+  if( DeviceOrientationEvent.requestPermission && typeof DeviceOrientationEvent.requestPermission === 'function' ){
+    var banner = '<div style="z-index: 1; position: absolute; width: 100%; background-color: rgb(0, 0, 0);" onclick="ClickRequestDeviceSensor();" id="sensorrequest"><p style="color: rgb(0, 0, 255);">センサーの有効化</p></div>';
+    $('body').prepend( banner );
+  } else {
+    window.addEventListener("devicemotion", (dat) =>{
+      pretimer = timer
+      timer = performance.now()
+      prex = aX;
+      prey = aY;
+      prez = aZ;
+      aX = dat.accelerationIncludingGravity.x;
+      aY = dat.accelerationIncludingGravity.y;
+      aZ = dat.accelerationIncludingGravity.z;
+      velx = (timer - pretimer)*(prex + aX)/2 + velx;
+      vely = (timer - pretimer)*(prey + aY)/2 + vely;
+      velz = (timer - pretimer)*(prez + aZ)/2 + velz;
+    });
+
+    window.addEventListener("deviceorientation", (dat) => {
+      alpha = dat.alpha;
+      beta  = dat.beta;
+      gamma = dat.gamma;
+    });
+
+    var timer = window.setInterval(() => {
+      displayData();
+    }, 200);
+  }
+}
+
+function displayData() {
+  var txt = document.getElementById("txt");
+  txt.innerHTML = "x: " + aX.toPrecision(4) + "<br>"
+                + "y: " + aY.toPrecision(4) + "<br>"
+                + "z: " + aZ.toPrecision(4) + "<br>"
+                + "α: " + alpha.toPrecision(4) + "<br>"
+                + "β: " + beta.toPrecision(4) + "<br>"
+                + "γ: " + gamma.toPrecision(4) + "<br>"
+                + "velx: " + velx.toPrecision(4) + "<br>"
+                + "vely: " + vely.toPrecision(4) + "<br>"
+                + "velz: " + velz.toPrecision(4) + "<br>";
+}
+</script>
+
 </body>
 </html>
+
