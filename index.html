@@ -23,7 +23,7 @@ function ClickRequestDeviceSensor(){
       $('#sensorrequest').css( 'display', 'none' );
       window.addEventListener("devicemotion", (dat) =>{
         pretimer = timer
-        timer = performance.now()
+        timer = performance.now()　/ 1000;
         prex = aX;
         prey = aY;
         prez = aZ;
@@ -57,7 +57,7 @@ if( window.DeviceOrientationEvent ){
   } else {
     window.addEventListener("devicemotion", (dat) =>{
       pretimer = timer
-      timer = performance.now()
+      timer = performance.now() / 1000;
       prex = aX;
       prey = aY;
       prez = aZ;
